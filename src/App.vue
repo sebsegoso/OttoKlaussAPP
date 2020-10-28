@@ -2,47 +2,44 @@
   <v-app id="inspire">
     <Navbar />
 
-    <v-main >
-    <router-view id="main"></router-view>
+    <v-main>
+      <router-view id="main"></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import {
-    mapActions,
-    mapState
-} from 'vuex'
-import Navbar from './components/Navbar'
+import { mapActions, mapState } from "vuex";
+import Navbar from "./components/Navbar";
 
 export default {
-    name: 'App',
-    title(){
-      return "Otto Klauss - Juguetería"
-    },
+  name: "App",
+  title() {
+    return "Otto Klauss - Juguetería";
+  },
 
-    components: {
-        Navbar
-    },
+  components: {
+    Navbar,
+  },
 
-    data: () => ({
-        //
-    }),
-    methods: {
-        ...mapActions(['getToys'])
-    },
-    created() {
-        this.getToys()
-    }
+  data: () => ({
+    //
+  }),
+  methods: {
+    ...mapActions(["getToys", "probanding"]),
+  },
+  created() {
+    this.getToys();
+  },
 };
 </script>
 
 <style lang="scss">
 body {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-#main{
+#main {
   padding: 3%;
 }
 </style>

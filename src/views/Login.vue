@@ -6,7 +6,7 @@
         <h3>Inicia sesión para acceder al sistema.</h3>
         <v-row>
           <!--iNPUT MAIL -->
-          <v-col cols="6">
+          <v-col cols="12" sm="6">
             <v-text-field
               v-model="email"
               :rules="emailRules"
@@ -16,11 +16,11 @@
             ></v-text-field>
           </v-col>
           <!--INPUT PASSWORD-->
-          <v-col cols="6">
+          <v-col cols="12" sm="6">
             <v-text-field
               v-model="password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
+              :rules="[rules.required]"
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
               label="Contraseña"
@@ -37,12 +37,12 @@
               >Iniciar sesión</v-btn
             >
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12" sm="6">
             <v-btn class="boton" elevation="5" color="error"
               >Iniciar con <i class="fab fa-google"></i> Google</v-btn
             >
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12" sm="6">
             <v-btn class="boton" elevation="5">Crear cuenta</v-btn>
           </v-col>
         </v-row>
