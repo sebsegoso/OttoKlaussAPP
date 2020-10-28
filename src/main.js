@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import firebase from 'firebase'
+import titleMixin from './mixins/titleMixin'
 
 var firebaseConfig = {
   apiKey: "AIzaSyBP6K4jEdfcGN6pIVnBX47taCqpxYN35iI",
@@ -19,6 +20,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
+Vue.mixin(titleMixin)
 
 new Vue({
   router,
