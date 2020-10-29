@@ -8,7 +8,7 @@
           <!--iNPUT MAIL -->
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="email"
+              v-model="user.email"
               :rules="emailRules"
               label="E-mail"
               type="email"
@@ -18,7 +18,7 @@
           <!--INPUT PASSWORD-->
           <v-col cols="12" sm="6">
             <v-text-field
-              v-model="password"
+              v-model="user.password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="[rules.required]"
               :type="show1 ? 'text' : 'password'"
@@ -34,12 +34,17 @@
               elevation="10"
               color="primary"
               :disabled="disabledlogin"
+              @click="signIn"
               >Iniciar sesión</v-btn
             >
           </v-col>
           <v-col cols="12" sm="6">
-            <v-btn class="boton" elevation="5" color="error"
-              >Iniciar con <i class="fab fa-google"></i> Google</v-btn
+            <v-btn
+              class="boton"
+              elevation="5"
+              color="error"
+              @click="signInWithGoogle"
+              ><i class="fab fa-google"></i>| Iniciar con Google</v-btn
             >
           </v-col>
           <v-col cols="12" sm="6">
@@ -48,22 +53,26 @@
         </v-row>
       </v-container>
     </v-form>
+    <router-link to="/">HOME</router-link>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   title() {
     return "Login | Otto Klauss";
   },
   data: () => ({
     valid: false,
-    email: "",
+    user: {
+      email: "",
+      password: "",
+    },
     emailRules: [
       (v) => !!v || "E-mail requerido",
       (v) => /.+@.+/.test(v) || "El formato del E-mail no es válido",
     ],
-    password: "",
     show1: false,
     rules: {
       required: (value) => !!value || "Contraseña requerida",
@@ -72,8 +81,15 @@ export default {
   }),
   computed: {
     disabledlogin() {
-      if (this.email.trim() == "" || this.password.trim() == "") return true;
+      if (this.user.email.trim() == "" || this.user.password.trim() == "")
+        return true;
       else return false;
+    },
+  },
+  methods: {
+    ...mapActions(["signInWithGoogle", "signInWithEmailAndPass"]),
+    signIn() {
+     this.signInWithEmailAndPass(this.user);
     },
   },
 };

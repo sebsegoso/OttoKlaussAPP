@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import firebase from 'firebase'
 
 //modules
-import auth from './auth'
+import auth from './Auth'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
