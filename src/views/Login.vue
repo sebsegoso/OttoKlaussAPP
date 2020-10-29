@@ -26,7 +26,6 @@
             </v-row>
         </v-container>
     </v-form>
-    <router-link to="/">HOME</router-link>
 </div>
 </template>
 

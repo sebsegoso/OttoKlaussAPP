@@ -3,13 +3,14 @@ import router from '../../router';
 
 export default {
     state: {
-        user: null
+        usuario: '',
+        mensaje: 'HOLA MI GENTE'
     },
     mutations: {
         LOG_IN(state, user) {
-            console.log(state.user , user)
-            state.user = user;
-            console.log(state.user)
+            console.log(state.usuario , user)
+            state.usuario = user;
+            console.log(state.usuario)
         }
     },
     actions: {
@@ -19,8 +20,8 @@ export default {
                 .auth()
                 .signInWithPopup(provider)
                 .then(result => {
-                    let usuario = result.user;
-                    console.log("Sesión iniciada :" + usuario.displayName);
+                    console.log("Sesión iniciada :" + result.user.displayName);
+                    let usuario = firebase.auth().currentUser
                     commit('LOG_IN', usuario)
                 })
                 .then(() => router.push('/'))

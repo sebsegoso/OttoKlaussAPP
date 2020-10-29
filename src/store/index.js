@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import firebase from 'firebase'
 
 //modules
-import auth from './Auth'
+import auth from './Auth/index'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -30,6 +30,15 @@ export default new Vuex.Store({
           })
           commit('GET_TOYS', juguetes)
         })
+    }
+  },
+  getters:{
+    juguetesData(state){
+      return state.juguetes.map(p =>{
+        let data = p.data
+        data.id = p.id
+        return data
+      })
     }
   },
   modules: {
