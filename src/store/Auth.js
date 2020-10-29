@@ -1,16 +1,18 @@
 import firebase from 'firebase'
-import router from '../../router';
+import router from '../router';
 
 export default {
+    namespaced: true,
     state: {
         usuario: '',
-        mensaje: 'HOLA MI GENTE'
+        mensajePrueba: 'HOLA'
     },
     mutations: {
         LOG_IN(state, user) {
-            console.log(state.usuario , user)
             state.usuario = user;
-            console.log(state.usuario)
+        },
+        LOG_OUT(state) {
+            state.usuario = ''
         }
     },
     actions: {
@@ -39,7 +41,17 @@ export default {
                 .then(() => router.push('/'))
                 .catch(error => console.log(error.message))
 
-        }
+        },
+        logOut({ commit }) {
+            firebase
+                .auth()
+                .signOut()
+                .then(() => {
+                    commit('LOG_OUT')
+                    alert("Sesión cerrada");
+                    router.push({ name: 'Login' });
+                });
+        },
     },
     getters: {
 

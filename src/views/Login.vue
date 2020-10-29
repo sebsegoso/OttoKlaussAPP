@@ -31,7 +31,8 @@
 
 <script>
 import {
-    mapActions
+    mapActions,
+    mapState
 } from "vuex";
 export default {
     name: "Login",
@@ -54,6 +55,7 @@ export default {
         },
     }),
     computed: {
+        ...mapState('Auth', ['mensajePrueba']),
         disabledlogin() {
             if (this.user.email.trim() == "" || this.user.password.trim() == "")
                 return true;
@@ -61,7 +63,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(["signInWithGoogle", "signInWithEmailAndPass"]),
+        ...mapActions('Auth', ["signInWithGoogle", "signInWithEmailAndPass"]),
         signIn() {
             this.signInWithEmailAndPass(this.user);
         },

@@ -3,36 +3,36 @@
     <v-app-bar color="#000" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-spacer></v-spacer>
+        <v-spacer />
 
         <v-btn outlined light>
             <router-link to="/">HOME</router-link>
         </v-btn>
 
-        <v-btn outlined>
-            <router-link to="/Login">INICIAR SESIÓN</router-link>
-        </v-btn>
-
-        <v-btn outlined>
-            <router-link to="/">CERRAR SESIÓN</router-link>
+        <v-btn @click="logOut" outlined v-if="usuario !== ''">
+            CERRAR SESIÓN
         </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary color="#000" dark>
-        <v-list>
+    <v-navigation-drawer v-model="drawer" absolute temporary color="#000" dark width="auto">
+        <v-list v-if="usuario !== ''">
             <v-list-item class="px-2">
                 <v-list-item-avatar>
-                    <v-img src="FOTO USUARIO" alt="FOTO USUARIO"></v-img>
+                    <v-img :src="usuario.photoURL" alt="FOTO USUARIO"></v-img>
                 </v-list-item-avatar>
+                <v-list-item-title class="title">
+                    {{ usuario.displayName }}
+                </v-list-item-title>
             </v-list-item>
 
-            <v-list-item link>
-                <v-list-item-content>
-                    <v-list-item-title class="title">
-                        NOMBRE USUARIO
-                    </v-list-item-title>
-                    <v-list-item-subtitle>CORREO USUARIO</v-list-item-subtitle>
-                </v-list-item-content>
+            <v-list-item>
+                <v-list-item-subtitle>{{ usuario.email }}</v-list-item-subtitle>
+            </v-list-item>
+        </v-list>
+
+        <v-list v-else>
+            <v-list-item>
+                <v-list-item-title> No has iniciado sesión </v-list-item-title>
             </v-list-item>
         </v-list>
 
@@ -58,14 +58,23 @@
                 <v-list-item-title>Starred</v-list-item-title>
             </v-list-item>
         </v-list>
+
+        <template v-slot:append>
+            <div class="pa-2">
+                <v-btn @click="logOut" color="red" outlined v-if="usuario !== ''">
+                    CERRAR SESIÓN
+                </v-btn>
+            </div>
+        </template>
     </v-navigation-drawer>
 </div>
 </template>
 
 <script>
 import {
-    mapState
-} from 'vuex'
+    mapState,
+    mapActions
+} from "vuex";
 export default {
     name: "Navbar",
     data: () => ({
@@ -73,7 +82,10 @@ export default {
         group: null,
     }),
     computed: {
-        ...mapState(['usuario'])
+        ...mapState("Auth", ["usuario"]),
+    },
+    methods: {
+        ...mapActions("Auth", ["logOut"]),
     },
     watch: {
         group() {

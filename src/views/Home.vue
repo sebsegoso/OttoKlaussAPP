@@ -1,7 +1,7 @@
 <template>
 <div class="home">
-    <h3 v-show="user.displayName">
-        Hola {{ user.displayName }} ({{ user.email }})
+    <h3 v-show="usuario.displayName">
+        Hola {{ usuario.displayName }} ({{ usuario.email }})
     </h3>
     <h1>Inventario de productos</h1>
     <hr />
@@ -49,12 +49,8 @@ export default {
         return "Otto Klauss - Juguetería";
     },
     computed: {
-        ...mapState(["juguetes", "usuario"]),
+        ...mapState('Auth', ["usuario"]),
         ...mapGetters(["juguetesData"]),
-    },
-    created() {
-        this.user = firebase.auth().currentUser;
-        console.log(this.user);
-    },
+    }
 };
 </script>
