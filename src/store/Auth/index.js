@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import router from '../../router';
 
 export default {
     state: {
@@ -6,7 +7,9 @@ export default {
     },
     mutations: {
         LOG_IN(state, user) {
+            console.log(state.user , user)
             state.user = user;
+            console.log(state.user)
         }
     },
     actions: {
@@ -20,16 +23,8 @@ export default {
                     console.log("Sesión iniciada :" + usuario.displayName);
                     commit('LOG_IN', usuario)
                 })
-                .catch(function (error) {
-                    // Handle Errors here.
-                    let errorCode = error.code;
-                    let errorMessage = error.message;
-                    // The email of the user's account used.
-                    let email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    let credential = error.credential;
-                    // ...
-                });
+                .then(() => router.push('/'))
+                .catch(error => console.log(error.message));
         },
         signInWithEmailAndPass({ commit }, user) {
             firebase
@@ -40,6 +35,7 @@ export default {
                     console.log("Sesión iniciada :" + usuario.displayName);
                     commit('LOG_IN', usuario)
                 })
+                .then(() => router.push('/'))
                 .catch(error => console.log(error.message))
 
         }
