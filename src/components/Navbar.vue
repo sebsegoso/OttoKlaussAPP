@@ -6,13 +6,7 @@
 
         <v-spacer />
 
-        <h6 v-if="usuario !== ''">
-            {{ usuario.displayName }} ({{ usuario.email }})
-        </h6>
-
-        <v-spacer />
-
-        <v-menu open-on-hover bottom offset-y v-if="usuario !== ''">
+        <v-menu :offset-x="true" open-on-hover left v-if="usuario !== ''">
             <template v-slot:activator="{ on, attrs }">
                 <v-avatar v-bind="attrs" v-on="on">
                     <v-img :src="usuario.photoURL" alt="FOTO USUARIO"></v-img>

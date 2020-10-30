@@ -5,7 +5,15 @@
     </h3>
     <h1>Inventario de productos</h1>
 
-    <v-data-table dense :headers="headers" :items="juguetesData" :items-per-page="10" class="elevation-10 rounded-lg"></v-data-table>
+    <v-row>
+        <v-col cols="12" :md="4">
+            <Accordion class="elevation-10 rounded-lg" />
+        </v-col>
+        <v-col cols="12" :md="8">
+            <v-data-table dark dense :headers="headers" :items="juguetesData" :items-per-page="10" class="elevation-10 rounded-lg"></v-data-table>
+        </v-col>
+
+    </v-row>
 </div>
 </template>
 </div>
@@ -18,9 +26,13 @@ import {
 } from "vuex";
 import firebase from "firebase";
 
+import Accordion from '../components/Accordion'
+
 export default {
     name: "Home",
-    components: {},
+    components: {
+        Accordion
+    },
     data() {
         return {
             user: "",
