@@ -10,9 +10,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta:{
-      login: true
-    }
+    // meta:{
+    //   login: true
+    // }
   },
   {
     path: '/login',

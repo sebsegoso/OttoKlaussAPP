@@ -11,12 +11,12 @@ export default new Vuex.Store({
     juguetes: []
   },
   mutations: {
-    GET_TOYS(state , juguetes){
+    GET_TOYS(state, juguetes) {
       state.juguetes = juguetes
     }
   },
   actions: {
-    getToys({commit}){
+    getToys({ commit }) {
       firebase
         .firestore()
         .collection('juguetes')
@@ -30,11 +30,26 @@ export default new Vuex.Store({
           })
           commit('GET_TOYS', juguetes)
         })
+    },
+    async addToy({ commit }, producto) {
+
+      //Ajustar formato del producto a cargar
+      let jugueteFormateado = {
+        codigo: producto.codigo.toUpperCase(),
+        nombre: producto.nombre,
+        stock: Number(producto.stock),
+        precio: Number(producto.precio)
+      }    
+
+      let agregarFB = await firebase
+        .firestore()
+        .collection('juguetes')
+        .add(jugueteFormateado);
     }
   },
-  getters:{
-    juguetesData(state){
-      return state.juguetes.map(p =>{
+  getters: {
+    juguetesData(state) {
+      return state.juguetes.map(p => {
         let data = p.data
         data.id = p.id
         return data
