@@ -4,9 +4,8 @@
         Hola {{ usuario.displayName }} ({{ usuario.email }})
     </h3>
     <h1>Inventario de productos</h1>
-    <hr />
 
-    <v-data-table :headers="headers" :items="juguetesData" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-data-table dense :headers="headers" :items="juguetesData" :items-per-page="10" class="elevation-10 rounded-lg"></v-data-table>
 </div>
 </template>
 </div>
@@ -46,7 +45,7 @@ export default {
         };
     },
     title() {
-        return "Otto Klauss - Juguetería";
+        return "Inventario | Otto Klauss";
     },
     computed: {
         ...mapState('Auth', ["usuario"]),

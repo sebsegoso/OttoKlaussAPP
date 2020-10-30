@@ -16,6 +16,7 @@ export default {
         }
     },
     actions: {
+        //ingresar con google
         signInWithGoogle({ commit }) {
             let provider = new firebase.auth.GoogleAuthProvider();
             firebase
@@ -29,6 +30,7 @@ export default {
                 .then(() => router.push('/'))
                 .catch(error => console.log(error.message));
         },
+        //ingresar con correo y clave
         signInWithEmailAndPass({ commit }, user) {
             firebase
                 .auth()
@@ -42,6 +44,7 @@ export default {
                 .catch(error => console.log(error.message))
 
         },
+        //cerrar sesión
         logOut({ commit }) {
             firebase
                 .auth()

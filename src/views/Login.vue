@@ -3,7 +3,10 @@
     <h1>Login:</h1>
     <v-form v-model="valid" class="form">
         <v-container>
-            <h3>Inicia sesión para acceder al sistema.</h3>
+            <h3>
+                <v-icon dark>mdi-login</v-icon> Inicia sesión para acceder al
+                sistema.
+            </h3>
             <v-row>
                 <!--iNPUT MAIL -->
                 <v-col cols="12" sm="6">
@@ -55,7 +58,7 @@ export default {
         },
     }),
     computed: {
-        ...mapState('Auth', ['mensajePrueba']),
+        ...mapState("Auth", ["mensajePrueba"]),
         disabledlogin() {
             if (this.user.email.trim() == "" || this.user.password.trim() == "")
                 return true;
@@ -63,7 +66,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions('Auth', ["signInWithGoogle", "signInWithEmailAndPass"]),
+        ...mapActions("Auth", ["signInWithGoogle", "signInWithEmailAndPass"]),
         signIn() {
             this.signInWithEmailAndPass(this.user);
         },

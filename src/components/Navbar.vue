@@ -2,19 +2,35 @@
 <div>
     <v-app-bar color="#000" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <h1>Otto Klauss</h1>
 
         <v-spacer />
 
-        <v-btn outlined light>
-            <router-link to="/">HOME</router-link>
-        </v-btn>
+        <h6 v-if="usuario !== ''">
+            {{ usuario.displayName }} ({{ usuario.email }})
+        </h6>
 
-        <v-btn @click="logOut" outlined v-if="usuario !== ''">
-            CERRAR SESIÓN
-        </v-btn>
+        <v-spacer />
+
+        <v-menu open-on-hover bottom offset-y v-if="usuario !== ''">
+            <template v-slot:activator="{ on, attrs }">
+                <v-avatar v-bind="attrs" v-on="on">
+                    <v-img :src="usuario.photoURL" alt="FOTO USUARIO"></v-img>
+                </v-avatar>
+            </template>
+
+            <v-list color="#000">
+                <v-list-item>
+                    <v-btn @click="logOut" small color="red">
+                        <v-icon>mdi-logout</v-icon>
+                        cerrar sesion
+                    </v-btn>
+                </v-list-item>
+            </v-list>
+        </v-menu>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary color="#000" dark width="auto">
+    <v-navigation-drawer v-model="drawer" absolute temporary color="#000" dark width="auto" class="rounded-r">
         <v-list v-if="usuario !== ''">
             <v-list-item class="px-2">
                 <v-list-item-avatar>
@@ -38,7 +54,7 @@
 
         <v-divider></v-divider>
 
-        <v-list nav dense>
+        <v-list nav>
             <v-list-item link>
                 <v-list-item-icon>
                     <v-icon>mdi-folder</v-icon>
@@ -58,11 +74,12 @@
                 <v-list-item-title>Starred</v-list-item-title>
             </v-list-item>
         </v-list>
-
-        <template v-slot:append>
+        <template v-slot:append v-if="usuario !== ''">
+            <v-divider />
             <div class="pa-2">
-                <v-btn @click="logOut" color="red" outlined v-if="usuario !== ''">
-                    CERRAR SESIÓN
+                <v-btn @click="logOut" x-large outlined color="red">
+                    <v-icon>mdi-logout</v-icon>
+                    cerrar sesion
                 </v-btn>
             </div>
         </template>
@@ -80,6 +97,7 @@ export default {
     data: () => ({
         drawer: false,
         group: null,
+
     }),
     computed: {
         ...mapState("Auth", ["usuario"]),
