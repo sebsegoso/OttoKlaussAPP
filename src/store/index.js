@@ -45,6 +45,27 @@ export default new Vuex.Store({
         .firestore()
         .collection('juguetes')
         .add(jugueteFormateado);
+    },
+    deleteToy({commit} , id ) {
+      firebase
+        .firestore()
+        .collection('juguetes')
+        .doc(id)
+        .delete();
+    },
+    editToy({commit} , juguete) {
+      let updateToy = {
+        nombre : juguete.nombre,
+        codigo : juguete.codigo,
+        stock : juguete.stock,
+        precio : juguete.precio
+      }
+      firebase
+        .firestore()
+        .collection('juguetes')
+        .doc(juguete.id)
+        .update(updateToy)
+
     }
   },
   getters: {

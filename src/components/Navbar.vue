@@ -34,7 +34,6 @@
                     {{ usuario.displayName }}
                 </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
                 <v-list-item-subtitle>{{ usuario.email }}</v-list-item-subtitle>
             </v-list-item>
@@ -53,19 +52,19 @@
                 <v-list-item-icon>
                     <v-icon>mdi-folder</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>My Files</v-list-item-title>
+                <v-list-item-title>Aquí irian</v-list-item-title>
             </v-list-item>
             <v-list-item link>
                 <v-list-item-icon>
                     <v-icon>mdi-account-multiple</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>Shared with me</v-list-item-title>
+                <v-list-item-title>Enlaces a otras vistas</v-list-item-title>
             </v-list-item>
             <v-list-item link>
                 <v-list-item-icon>
                     <v-icon>mdi-star</v-icon>
                 </v-list-item-icon>
-                <v-list-item-title>Starred</v-list-item-title>
+                <v-list-item-title>Si fuese necesario</v-list-item-title>
             </v-list-item>
         </v-list>
         <template v-slot:append v-if="usuario !== ''">

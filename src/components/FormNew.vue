@@ -5,7 +5,7 @@
     <v-text-field label="Stock" v-model="newProducto.stock" required outlined></v-text-field>
     <v-text-field label="Precio" v-model="newProducto.precio" required outlined></v-text-field>
 
-    <v-btn color="success" :disabled="disabledBoton" @click="agregarProducto() , clear()">
+    <v-btn color="success" :disabled="disabledBoton" @click="agregarProducto()">
         <v-icon>mdi-plus</v-icon> Agregar
     </v-btn>
 </div>
@@ -15,46 +15,67 @@
 import {
     mapActions,
     mapGetters
-} from 'vuex'
+} from "vuex";
 export default {
     data() {
         return {
             newProducto: {
-                codigo: 'A00',
-                nombre: '',
-                stock: '',
-                precio: ''
-            }
-        }
+                codigo: "A00",
+                nombre: "",
+                stock: "",
+                precio: "",
+            },
+        };
     },
     methods: {
-        ...mapActions(['addToy']),
+        ...mapActions(["addToy"]),
         agregarProducto() {
-            this.addToy(this.newProducto)
+            this.$swal({
+                title: "¿Quieres agregar el siguiente producto?",
+                text: `
+                Nombre: ${this.newProducto.nombre}
+                | Código: ${this.newProducto.codigo}
+                | Stock: ${this.newProducto.stock}
+                | Precio: ${this.newProducto.precio}
+                `,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.addToy(this.newProducto);
+                    this.$swal(
+                        "Producto agregado",
+                        `El producto ${this.newProducto.nombre} ha sido agregado`,
+                        "success"
+                    );
+                    this.clear()
+                }
+            });
         },
         clear() {
-            this.newProducto.codigo = ''
-            this.newProducto.nombre = ''
-            this.newProducto.stock = ''
-            this.newProducto.precio = ''
-        }
+            this.newProducto.codigo = "";
+            this.newProducto.nombre = "";
+            this.newProducto.stock = "";
+            this.newProducto.precio = "";
+        },
     },
     computed: {
-        ...mapGetters(['juguetesData']),
+        ...mapGetters(["juguetesData"]),
         disabledBoton() {
             if (
-                this.newProducto.codigo === '' ||
-                this.newProducto.nombre === '' ||
-                this.newProducto.stock === '' ||
-                this.newProducto.precio === ''
+                this.newProducto.codigo === "" ||
+                this.newProducto.nombre === "" ||
+                this.newProducto.stock === "" ||
+                this.newProducto.precio === ""
             )
-                return true
-
-            else return false
+                return true;
+            else return false;
         },
-        matchCode() {
-
-        }
+        matchCode() {},
     },
-}
+};
 </script>

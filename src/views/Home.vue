@@ -7,14 +7,15 @@
         <h1>Inventario de productos</h1>
 
         <v-row>
-            <v-col cols="12" :md="4">
+            <v-col cols="12" :md="3">
                 <Accordion class="elevation-10 rounded-lg" />
             </v-col>
-            <v-col cols="12" :md="8">
+            <v-col cols="12" :md="9">
                 <TablaUsuarios />
             </v-col>
 
         </v-row>
+
     </v-container>
 </div>
 </template>
@@ -28,12 +29,14 @@ import firebase from "firebase";
 //Componentes
 import Accordion from '../components/Accordion'
 import TablaUsuarios from '../components/TablaUsuarios'
+import FormEdit from '../components/FormEdit'
 
 export default {
     name: "Home",
     components: {
         Accordion,
-        TablaUsuarios
+        TablaUsuarios,
+        FormEdit
     },
     data() {
         return {};
