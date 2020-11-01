@@ -21,9 +21,9 @@
 
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="warning" :disabled="disabledBoton" @click="clear()">
+            <!--<v-btn color="warning" :disabled="disabledBoton" @click="clear()">
                 Limpiar formulario
-            </v-btn>
+            </v-btn>-->
 
             <v-btn color="success" :disabled="disabledBoton" @click="agregarProducto()">
                 <v-icon>mdi-pencil</v-icon> Confirmar edición

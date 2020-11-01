@@ -20,12 +20,12 @@
                 <v-col cols="12">
                     <v-btn class="boton" elevation="10" color="success" dark :disabled="disabledlogin" @click="signIn">Iniciar sesión</v-btn>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12">
                     <v-btn class="boton" elevation="5" color="error" @click="signInWithGoogle"><i class="fab fa-google"></i>| Iniciar con Google</v-btn>
                 </v-col>
-                <v-col cols="12" sm="6">
+                <!--<v-col cols="12" sm="6">
                     <v-btn class="boton" elevation="5">Regístrate</v-btn>
-                </v-col>
+                </v-col>-->
             </v-row>
         </v-container>
     </v-form>
